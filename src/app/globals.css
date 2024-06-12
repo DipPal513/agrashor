@@ -21,7 +21,45 @@
 /* header-------------- */
 
 @media screen and (max-width: 768px){
-  .bottom_menu li:not(.menu_bar) {
+  .bottom_menu li:not(.menu_bar){
+   
     display: none;
   }
+  .bottom_menu li.bottom_header_logo{
+    display: block;
+  }
+}
+
+@media screen and (max-width: 860px){
+  .top_header {
+    display: none;
+  }
+ 
+}
+.menu_item {
+  position: relative;
+  transition: all 0.3s ease-in;
+}
+
+.menu_item::before {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 2px; /* Adjust the thickness of the underline here */
+  background-color: #1288b0; /* Adjust the color of the underline here */
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease-in;
+}
+
+.menu_item:hover::before {
+  width: 100%;
+}
+.menu_item:hover{
+  color: #1288b0;
+}
+.side_nav li{
+  padding: 5px 0;
+  border-bottom: 2px solid #d8d8d8aa;
+  font-weight: 600;
 }

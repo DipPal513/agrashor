@@ -1,181 +1,94 @@
 "use client";
-
-import React, { useState } from "react";
-import Link from "next/link";
-import { IoSearchOutline } from "react-icons/io5";
-import { GoBell } from "react-icons/go";
+import React, { useEffect, useState } from "react";
+import {
+  IoArchiveOutline,
+  IoSearch,
+  IoSearchCircleOutline,
+} from "react-icons/io5";
+import moment from "moment";
+import "moment/locale/bn"; // Import Bengali locale
+import "moment-hijri"; // Import Hijri calendar support
 import Image from "next/image";
+import { IoMdLocate } from "react-icons/io";
+import { IoNewspaper } from "react-icons/io5";
+import { FaVideo } from "react-icons/fa";
+import { BsArchiveFill } from "react-icons/bs";
 const TopHeader = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [gregorianDate, setGregorianDate] = useState("");
+  const [hijriDate, setHijriDate] = useState("");
+  const [bengaliDate, setBengaliDate] = useState("");
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    // Set the locale to Bengali
+    moment.locale("bn");
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+    // Function to update the dates
+    const updateDates = () => {
+      const now = moment();
+
+      // Format the Gregorian date in Bengali
+      const formattedGregorianDate = now.format("LL");
+      setGregorianDate(formattedGregorianDate);
+
+      // Format the Hijri date
+      const formattedHijriDate = now.clone().format("iD iMMMM iYYYY");
+      setHijriDate(formattedHijriDate);
+
+      // Format the Bengali date (using the Bengali calendar)
+      const formattedBengaliDate = now.format("LL");
+      setBengaliDate(formattedBengaliDate);
+    };
+
+    // Update dates initially
+    updateDates();
+  }, []);
 
   return (
-    <header>
-      <nav className="bg-white border-gray-200 mt-3 border-t-2 border-b-2">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-8 px-2">
-          <Link
-            href="/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-           <Image src={"/images/logo.png"} width={200} height={100}/>
-          </Link>
-          <button
-            onClick={toggleMenu}
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-dropdown"
-            aria-expanded={isMenuOpen}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
+    <div className="max-w-screen-xl mx-auto flex items-center justify-between py-3 px-2 top_header">
+      <div className="">
+        <div className="search flex items-center mb-2">
+          <input
+            type="text"
+            placeholder="অনুসন্ধান করুন"
+            className="border rounded px-2 py-1"
+          />
+          <button className="cursor-pointer ms-2 text-xl">
+            <IoSearch />
           </button>
-          <div
-            className={`${
-              isMenuOpen ? "block" : "hidden"
-            } w-full md:block md:w-auto`}
-            id="navbar-dropdown"
-          >
-            <ul className="flex flex-col font-bold p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
-              <li>
-                <Link
-                  href="/"
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
-                  aria-current="page"
-                >
-                  আজকের খবর
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/"
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
-                  aria-current="page"
-                >
-                  ই-পেপার
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={toggleDropdown}
-                  id="dropdownNavbarLink"
-                  className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                >
-                  মেগাজিন
-                  <svg
-                    className="w-2.5 h-2.5 ms-2.5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 1 4 4 4-4"
-                    />
-                  </svg>
-                </button>
-                <div
-                  className={`${
-                    isDropdownOpen ? "block" : "hidden"
-                  } z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
-                >
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-400"
-                    aria-labelledby="dropdownLargeButton"
-                  >
-                    <li>
-                      <Link
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Dashboard
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Settings
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Earnings
-                      </Link>
-                    </li>
-                  </ul>
-                  <div className="py-1">
-                    <Link
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Sign out
-                    </Link>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                 আর্কাইভ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  স্যোশাল মিডিয়া
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  বাংলা কনভার্টার
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className="flex items-center gap-2 text-2xl text-black">
-            <IoSearchOutline />
-            <GoBell />
-          </div>
         </div>
-      </nav>
-    </header>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
+            <IoMdLocate /> <p>ঢাকা</p>
+          </div>
+          <p>{gregorianDate}</p>
+        </div>
+      </div>
+      <div>
+        <Image
+          src={"/images/logo.jpg"}
+          className="logo"
+          width={300}
+          height={150}
+        />
+      </div>
+      <div>
+        <p className="text-red-500 text-xl mb-5">English Edition</p>
+        <ul className="flex items-center gap-3">
+          <li className="flex items-center gap-2">
+            <BsArchiveFill />
+            <p>আর্কাইভ</p>
+          </li>
+          <li className="flex items-center gap-2">
+            <FaVideo />
+            <p>ভিডিও</p>
+          </li>
+          <li className="flex items-center gap-2">
+            <IoNewspaper />
+            <p>ই-পেপার</p>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 };
 

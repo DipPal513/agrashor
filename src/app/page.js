@@ -1,10 +1,12 @@
+import Hero from "@/components/Hero";
 import Image from "next/image";
 
 export default function Home() {
   return (
-     <>
-     <div className="h-[100vh] bg-green-500"></div>
-     <div className="h-[100vh] bg-red-500"></div>
-     </>
+    <main className="w-full">
+        {/* <Hero /> */}
+      <div className="max-w-screen-xl mx-auto">
+      </div>
+    </main>
   );
 }

@@ -4,9 +4,11 @@ import BottomHeader from "./BottomHeader";
 
 export const Header = () => {
   return (
-    <>
-      <TopHeader />
+    <header className="w-full">
+      <div className="border-b-2">
+        <TopHeader />
+      </div>
       <BottomHeader />
-    </>
+    </header>
   );
 };
