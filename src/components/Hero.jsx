@@ -17,7 +17,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-2 mt-2">
-        <div className="md:col-span-6 grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div className="md:col-span-6 grid grid-cols-1 md:grid-cols-3 gap-2"> 
           <div className="col-span-1 md:col-span-3 p-1 mb-3 border-2">
             <div className="flex flex-col md:flex-row gap-4">
               <div>
