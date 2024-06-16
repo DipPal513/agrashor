@@ -4,7 +4,7 @@ import National from "@/components/National";
 import OpinionBankSurvey from "@/components/Opinion_bank_Survey";
 import Politics from "@/components/Politics";
 import VideoSlider from "@/components/VideoSlider";
-import Ad from "@/components/ad";
+import Ad from "@/components/Ad";
 import Image from "next/image";
 
 export default function Home() {
