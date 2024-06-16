@@ -3,9 +3,17 @@
 @tailwind utilities;
 
 :root {
+  --footer-color:#F5EABB;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+}
+html,body{
+  height: 100%;
+  margin: 0;
+}
+* {
+  font-family: var(--solaiman-lipi);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,26 +24,30 @@
   }
 }
 
-
+/* Apply text-xl class to all <p> elements */
+p {
+  @apply text-xl;
+}
 
 /* header-------------- */
 
-@media screen and (max-width: 768px){
-  .bottom_menu li:not(.menu_bar){
-   
+/* @media screen and (max-width: 768px) {
+  
+  
+} */
+
+@media screen and (max-width: 860px) {
+  .top_header {
     display: none;
   }
-  .bottom_menu li.bottom_header_logo{
+  .bottom_menu li:not(.menu_bar) {
+    display: none;
+  }
+  .bottom_menu li.bottom_header_logo {
     display: block;
   }
 }
 
-@media screen and (max-width: 860px){
-  .top_header {
-    display: none;
-  }
- 
-}
 .menu_item {
   position: relative;
   transition: all 0.3s ease-in;
@@ -55,11 +67,32 @@
 .menu_item:hover::before {
   width: 100%;
 }
-.menu_item:hover{
+.menu_item:hover {
   color: #1288b0;
 }
-.side_nav li{
+
+.side_nav li {
   padding: 5px 0;
   border-bottom: 2px solid #d8d8d8aa;
   font-weight: 600;
 }
+/* hero------------- */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 10s linear infinite; /* Adjust timing and other properties as needed */
+  white-space: nowrap; /* Ensure text doesn't wrap */
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused; /* Pause animation on hover */
+}
+
+/* footer---------- */

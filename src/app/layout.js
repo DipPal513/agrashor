@@ -1,9 +1,17 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
+import localfont from "next/font/local";
+import Footer from "@/components/Footer";
 
-
-const inter = Inter({ subsets: ["latin"] });
+const solaimanLipi = localfont({
+  src: [
+    {
+      path: "../../public/fonts/solaimanlipi.ttf"
+    }
+  ],
+  variable: "--solaiman-lipi"
+})
 
 export const metadata = {
   title: "অগ্রসর | বিডি নিউজ | বাংলা নিউজ",
@@ -14,10 +22,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
 
-      <body className={inter.className}>
+      <body className={solaimanLipi.variable}>
         <Header />
 
-        {children}</body>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

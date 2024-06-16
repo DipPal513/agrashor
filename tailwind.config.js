@@ -7,6 +7,7 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+   
     extend: {
       colors: {
         lightblue: {
@@ -18,6 +19,10 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      
+      fontFamily:{
+        solaimanLipi:["var(--solaiman-lipi)"]
+      }
     },
   },
   plugins: [],
